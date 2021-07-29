@@ -1,0 +1,9 @@
+.tab-spacing{
+    padding: 10px;
+}
+.example-container{
+    overflow: auto;
+}
+.list-container{
+    border: 1px solid gray;
+}

@@ -1,0 +1,33 @@
+
+  <mat-vertical-stepper [linear]="false" #stepper>
+    <mat-step *ngFor="let _step of _task.steps">
+      <form>
+        <ng-template matStepLabel>{{_step.stepName}}
+          <mat-icon matChipEdit (click)="stepEditSelected(_step)">edit</mat-icon>
+        </ng-template>
+        <app-task-step [task_step]="_step" [parentTaskDef]="_task"></app-task-step>
+      </form>
+    </mat-step>
+  </mat-vertical-stepper>
+  <div>
+    <button mat-button (click)="AddStep()">Add Step</button>
+
+  </div>
+
+  <br/>
+  <br/>
+  <button mat-button (click)="DownloadJson()">Download Json</button>&nbsp;
+  <button mat-button (click)="UploadJson()">Upload Json</button>&nbsp;
+  <button mat-button (click)="StartTask()">Start New task</button>&nbsp;
+  <br>
+
+  <div *ngIf="isFileUpload">
+    <div class="form-group">
+      <label for="file">Choose File</label>
+      <input type="file"
+             id="file"
+             (change)="handleFileInput($event.target.files)">
+  </div>
+  </div>
+
+

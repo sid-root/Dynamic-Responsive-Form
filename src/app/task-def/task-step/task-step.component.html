@@ -1,0 +1,38 @@
+
+
+<!-- <div *ngFor="let _element of task_step.elements;let i = index;">
+  <mat-form-field>
+    <mat-label *ngIf="i==0">Field Name</mat-label>
+    <input matInput [placeholder]="(i==0)?'Enter the Name':null" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label *ngIf="i==0">Field Type</mat-label>
+    <mat-select [(ngModel)]="_element.eltType" name="elementType">
+      <mat-option *ngFor="let elt of _eltTypes" [value]="elt.eltType">
+        {{elt.eltName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</div> -->
+<div>
+<mat-chip-list class="example-chip" cdkDropList cdkDropListOrientation="horizontal"  (cdkDropListDropped)="drop($event)">
+  <ng-container *ngFor="let _element of task_step.elements;let i = index;">
+    <div *ngIf="_element.eltType == 10" class="chip-new-line">&nbsp;</div>
+  <mat-chip class="example-box" cdkDrag selected [selectable]="true" [color]="_element.eltType == 10 ? 'warn':'primary'"
+  [removable]="removable" (removed)="removeElement(i)">
+  <span (click)="elementSelected(_element)">
+  {{_element.eltName}}
+  <!-- <mat-icon matChipEdit *ngIf="removable">edit</mat-icon> -->
+</span>  
+    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+  </mat-chip>
+  
+</ng-container>
+</mat-chip-list>
+</div>
+<div>
+  <button mat-button (click)="AddField()">Add Field</button>
+
+</div>

@@ -1,0 +1,62 @@
+<h1 mat-dialog-title>Element Config </h1>
+<div mat-dialog-content>
+  <mat-tab-group>
+    <mat-tab label="General"> 
+      <div class="tab-spacing">
+        
+        <div class="example-container">
+          <mat-form-field>
+            <mat-label>Field Name</mat-label>
+            <input matInput [placeholder]="'Enter Field Name'" required [(ngModel)]="stepElementObj.eltName">
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <mat-label>Field Type</mat-label>
+            <mat-select [(ngModel)]="stepElementObj.eltType" name="elementType">
+              <mat-option *ngFor="let elt of _eltTypes" [value]="elt.eltType">
+                {{elt.eltName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div *ngIf="stepElementObj.eltType == 1">
+            <mat-form-field>
+              <mat-label>Default Value</mat-label>
+              <input matInput [placeholder]="'Enter Default Value'" [(ngModel)]="stepElementObj.eltProperties.defaultVal">
+            </mat-form-field>
+          </div>
+
+          <div *ngIf="stepElementObj.eltType == 5" class="list-container">
+            <opt-list-config [selectList]="stepElementObj.eltProperties.listOptions"></opt-list-config>
+
+          </div>
+
+          <div *ngIf="stepElementObj.eltType == 10">
+            <mat-form-field>
+              <mat-label>on Submit</mat-label>
+              <mat-select [(ngModel)]="stepElementObj.eltProperties.onSubmitAction" name="elementType">
+                <mat-option [value]="'default'">Default Action (Move Next)</mat-option>
+                <mat-option [value]="'task_halt'">Halt Task (End)</mat-option>
+                <mat-option [value]="'task_complete'">Task Complete</mat-option>
+                <mat-option *ngFor="let _stepName of _stepNames" [value]="_stepName">
+                  Move to {{_stepName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="User"> 
+        <div>
+            <access-select [readonlyUsers]="stepElementObj.readonlyUsers" [readwriteUsers]="stepElementObj.readwriteUsers"></access-select>
+        </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<div mat-dialog-actions>
+  <!-- <button mat-button (click)="onClose()">Close</button> -->
+  <button mat-button [mat-dialog-close]="1" cdkFocusInitial>Done</button>
+</div>

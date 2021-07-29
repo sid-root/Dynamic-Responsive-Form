@@ -1,0 +1,28 @@
+<mat-grid-list cols="2" rowHeight="100px">
+    <mat-grid-tile [colspan]="1" [rowspan]="2">
+        <div class="sel-list-div">
+        <mat-selection-list #items [multiple]="false" [(ngModel)]="selItem">
+            <mat-list-option *ngFor="let _item of selectList" [value]="_item">
+              {{_item}}
+            </mat-list-option>
+          </mat-selection-list>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput [placeholder]="'Enter Name'" required [(ngModel)]="currItem">
+        </mat-form-field>
+        <button mat-button (click)="AddItem()" [disabled]="currItem == ''">Add</button>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <div *ngIf="selItem">
+            <button mat-button (click)="MoveUp()">Move Up</button>
+            <button mat-button (click)="MoveDown()">Move Down</button>
+            <button mat-button (click)="RemoveItem()">Remove</button>
+
+        </div>
+    </mat-grid-tile>
+
+  </mat-grid-list>
